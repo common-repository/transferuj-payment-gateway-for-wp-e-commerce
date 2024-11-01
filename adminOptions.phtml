@@ -1,0 +1,50 @@
+<?php
+
+$view = get_option('transferuj_view');
+$img = 'https://tpay.com/img/logo/tpaycom.png';
+?>
+<tr>
+    <td colspan="2" style="text-align:center;"><br/><a href="http://tpay.com" target="_new"><img
+                src="<?php echo $img ?>" height="145" width="250"/></a>
+        <br/><a href="https://secure.tpay.com/panel/rejestracja.htm" target="_new">Zarejestruj konto w systemie
+            Tpay.com</a></td>
+</tr>
+<tr>
+    <td colspan="2"><strong>Ustawienia</strong></td>
+</tr>
+
+<tr>
+    <td><label for="transferuj_merchantid">ID Sprzedawcy</label></td>
+    <td><input name="transferuj_merchantid" id="transferuj_merchantid" type="text" value="<?php echo $this->id ?>"/><br/>
+        <?php echo $this->tpay_form_hint('ID Sprzedawcy w systemie Tpay.com.'); ?>
+    </td>
+</tr>
+
+<tr>
+    <td><label for="transferuj_secretpass">Kod bezpieczeństwa</label></td>
+    <td><input name="transferuj_secretpass" id="transferuj_secretpass" type="text" value="<?php echo $this->secret ?>"/><br/>
+        <?php echo $this->tpay_form_hint('Kod bezpieczeństwa dostępny w Panelu Odbiorcy Płatności.'); ?>
+    </td>
+</tr>
+
+<?php $views = array();
+$views['0'] = 'Ikony banków na stronie sklepu';
+$views['1'] = 'Lista banków na stronie sklepu';
+$views['2'] = 'Przekierowanie na Tpay.com';
+?>
+<tr>
+    <td><label for="transferuj_view">Wybór kanału płatności</label></td>
+    <td>
+        <select name='transferuj_view'>
+            <?php foreach ($views as $key => $value) {
+                echo '<option value="' . $key . '"';
+                if ($view == $key) {
+                    echo 'selected="selected"';
+                }
+                echo '>' . $value . '</option>';
+            }
+            ?>
+        </select><br/>
+        <?php echo $this->tpay_form_hint('Wybierz w jakim miejscu Klient ma dokonać wyboru kanału płatności.'); ?>
+    </td>
+</tr>
